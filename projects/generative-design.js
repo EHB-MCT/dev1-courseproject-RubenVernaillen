@@ -4,16 +4,15 @@ import context from "../../scripts/context.js";
 import * as Utils from "../../scripts/utils.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
-
+let x = Utils.randomNumber(0, width)
+let y = Utils.randomNumber(0, height)
+let framecount = 0;
 
 draweye();
-
 function draweye() {
-    for (let i = 0; i < 100; i++) {
-        let x = Utils.randomNumber(0, width)
-        let y = Utils.randomNumber(0, height)
-        context.lineWidth = 1;
+    for (let i = 0; i < 1; i++) {
 
+        context.lineWidth = 1;
         Utils.strokeEllipse(x, y, 50, 25)
         context.fillStyle = "rgba(0, 0, 0, 0.1)"
         Utils.fillEllipse(x, y, 45, 20)
@@ -50,3 +49,29 @@ function draweye() {
 
     }
 }
+
+draweyelid();
+function draweyelid() {
+
+
+
+
+
+    if (framecount < 50)
+        framecount++;
+    context.fillStyle = "black";
+    Utils.fillEllipse(x, y - 25, 50, framecount)
+    requestAnimationFrame(draweyelid)
+
+    else
+    framecount--;
+    context.fillStyle = "black";
+    Utils.fillEllipse(x, y - 25, 50, framecount)
+    requestAnimationFrame(draweyelid);
+
+
+
+}
+
+
+
