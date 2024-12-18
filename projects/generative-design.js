@@ -34,7 +34,7 @@ function draweye() {
         context.lineWidth = 1;
         Utils.strokeEllipse(eyelist.oogX, eyelist.oogY, 50, 25)
         context.fillStyle = "rgba(0, 0, 0, 0.1)"
-        Utils.fillEllipse(eyelist.oogX, eyelist.oogX, 45, 20)
+        Utils.fillEllipse(eyelist.oogX, eyelist.oogY, 45, 20)
         context.fillStyle = eyelist.iriskleur
         Utils.fillEllipse(eyelist.irisX, eyelist.irisY, 25, 25)
         context.fillStyle = "#000000"
@@ -80,7 +80,7 @@ function mouseMove(eventData) {
     let MouseX = eventData.clientY
 
     eyelist.forEach(eye => {
-        let angle = Math.atan2(MouseY - eye.oogY, MouseX - eye.oogX);
+        let angle = Math.atan2(MouseX - eye.oogY, MouseY - eye.oogX);
         let distance = Math.min(25, Math.hypot(MouseX - eye.oogX, MouseY - eye.oogY));
         eye.irisX = eye.oogX + Math.cos(angle) * distance;
         eye.irisY = eye.oogY + Math.sin(angle) * distance;
@@ -90,7 +90,10 @@ function mouseMove(eventData) {
     draweye();
 
 }
+window.addEventListener("mousemove", mouseMove);
 
+
+draweye();
 
 
 
