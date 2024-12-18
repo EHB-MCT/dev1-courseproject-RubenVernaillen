@@ -22,8 +22,54 @@ for (let i = 0; i < 10; i++) {
     window.onmousemove = mouseMove;
     let x = Utils.randomNumber(0, width)
     let y = Utils.randomNumber(0, height)
-    eyelist.draweye.push(createye())
+    eyelist.push(createye(x, y))
+
 }
+function draweye() {
+    context.clearRect(0, 0, width, height);
+    eyelist.forEach(eyelist => {
+
+
+
+        context.lineWidth = 1;
+        Utils.strokeEllipse(eyelist.oogX, eyelist.oogY, 50, 25)
+        context.fillStyle = "rgba(0, 0, 0, 0.1)"
+        Utils.fillEllipse(eyelist.oogX, eyelist.oogX, 45, 20)
+        context.fillStyle = eyelist.iriskleur
+        Utils.fillEllipse(eyelist.irisX, eyelist.irisY, 25, 25)
+        context.fillStyle = "#000000"
+        Utils.fillEllipse(eyelist.irisX, eyelist.irisY, 8, 8)
+        context.lineWidth = 0.5;
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 15, eyelist.irisY + 15)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 15, eyelist.irisY - 15)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 15, eyelist.irisY - 15)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 15, eyelist.irisY + 15)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX, eyelist.irisY - 20)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 20, eyelist.irisY)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX, eyelist.irisY + 20)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 20, eyelist.irisY)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 14, eyelist.irisY - 6)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY - 6)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 14, eyelist.irisY + 6)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY - 6)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY + 6)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 6, eyelist.irisY - 14)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY - 14)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 6, eyelist.irisY + 14)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY - 14)
+        Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY + 14)
+
+        context.fillStyle = "#FFFFFF"
+
+        Utils.fillEllipse(eyelist.irisX - 14, eyelist.irisY - 14, 8, 8)
+        Utils.fillEllipse(eyelist.irisX + 14, eyelist.irisY + 14, 4, 4)
+
+    })
+}
+
+
+
+
 
 /**
  * 
@@ -34,10 +80,10 @@ function mouseMove(eventData) {
     let MouseX = eventData.clientY
 
     eyelist.forEach(eye => {
-        let angle = Math.atan2(MouseY - eye.y, MouseX - eye.x);
-        let distance = Math.min(eye.radius - eye.irisRadius, Math.hypot(MouseX - eye.x, MouseY - eye.y));
-        eye.irisX = eye.x + Math.cos(angle) * distance;
-        eye.irisY = eye.y + Math.sin(angle) * distance;
+        let angle = Math.atan2(MouseY - eye.oogY, MouseX - eye.oogX);
+        let distance = Math.min(25, Math.hypot(MouseX - eye.oogX, MouseY - eye.oogY));
+        eye.irisX = eye.oogX + Math.cos(angle) * distance;
+        eye.irisY = eye.oogY + Math.sin(angle) * distance;
 
 
     })
@@ -49,49 +95,7 @@ function mouseMove(eventData) {
 
 
 
-draweye();
 
-
-
-function draweye() {
-
-
-
-
-    context.lineWidth = 1;
-    Utils.strokeEllipse(eyelist.oogX, eyelist.oogY, 50, 25)
-    context.fillStyle = "rgba(0, 0, 0, 0.1)"
-    Utils.fillEllipse(eyelist.oogX, eyelist.oogX, 45, 20)
-    context.fillStyle = eyelist.iriskleur
-    Utils.fillEllipse(eyelist.irisX, eyelist.irisY, 25, 25)
-    context.fillStyle = "#000000"
-    Utils.fillEllipse(eyelist.irisX, eyelist.irisY, 8, 8)
-    context.lineWidth = 0.5;
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 15, eyelist.irisY + 15)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 15, eyelist.irisY - 15)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 15, eyelist.irisY - 15)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 15, eyelist.irisY + 15)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX, eyelist.irisY - 20)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 20, eyelist.irisY)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX, eyelist.irisY + 20)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 20, eyelist.irisY)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 14, eyelist.irisY - 6)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY - 6)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 14, eyelist.irisY + 6)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY - 6)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 14, eyelist.irisY + 6)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 6, eyelist.irisY - 14)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY - 14)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX + 6, eyelist.irisY + 14)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY - 14)
-    Utils.drawLine(eyelist.irisX, eyelist.irisY, eyelist.irisX - 6, eyelist.irisY + 14)
-
-    context.fillStyle = "#FFFFFF"
-
-    Utils.fillEllipse(eyelist.irisX - 14, eyelist.irisY - 14, 8, 8)
-    Utils.fillEllipse(eyelist.irisX + 14, eyelist.irisY + 14, 4, 4)
-
-}
 
 
 
