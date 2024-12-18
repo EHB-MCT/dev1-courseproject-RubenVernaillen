@@ -5,11 +5,6 @@ import * as Utils from "../../scripts/utils.js";
 let width = context.canvas.width;
 let height = context.canvas.height;
 let eyelist = [];
-for (let i = 0; i < 10; i++) {
-    let x = Utils.randomNumber(0, width)
-    let y = Utils.randomNumber(0, height)
-    eyelist.draweye.push(createye(x, y))
-}
 
 function createye(x, y) {
 
@@ -21,6 +16,33 @@ function createye(x, y) {
         iriskleur: Utils.rgb(Utils.randomNumber(0, 360), Utils.randomNumber(0, 360), Utils.randomNumber(0, 360)),
 
     }
+}
+
+for (let i = 0; i < 10; i++) {
+    window.onmousemove = mouseMove;
+    let x = Utils.randomNumber(0, width)
+    let y = Utils.randomNumber(0, height)
+    eyelist.draweye.push(createye())
+}
+
+/**
+ * 
+ * @param {MouseEvent} eventData 
+ */
+function mouseMove(eventData) {
+    let MouseY = eventData.clientX
+    let MouseX = eventData.clientY
+
+    eyelist.forEach(eye => {
+        let angle = Math.atan2(MouseY - eye.y, MouseX - eye.x);
+        let distance = Math.min(eye.radius - eye.irisRadius, Math.hypot(MouseX - eye.x, MouseY - eye.y));
+        eye.irisX = eye.x + Math.cos(angle) * distance;
+        eye.irisY = eye.y + Math.sin(angle) * distance;
+
+
+    })
+    draweye();
+
 }
 
 
